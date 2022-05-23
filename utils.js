@@ -144,6 +144,7 @@ module.exports.decodeUserData72 = (userData)=>{
 }
 
 module.exports.decodeRecordData40 = (recordData)=>{
+    console.log({recordData})
     const record = {
         userSn: recordData.readUIntLE(0, 2),
         deviceUserId: recordData
@@ -152,6 +153,8 @@ module.exports.decodeRecordData40 = (recordData)=>{
         .split('\0')
         .shift(),
         recordTime: parseTimeToDate(recordData.readUInt32LE(27)),
+        verifyType: recordData.readUIntLE(26,1),
+        verifyState: recordData.readUIntLE(31,1),
       }
       return record
 }
